@@ -5,11 +5,16 @@
   "main": "src/index.js",
   "dependencies": {},
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.12.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0"
   },
   "scripts": {
+    "build": "babel src -d lib",
     "commit": "npx git-cz",
     "lint": "eslint src",
     "test": "jest"
@@ -28,5 +33,10 @@
   "bugs": {
     "url": "https://github.com/eflo11/webpack-data-url/issues"
   },
-  "homepage": "https://github.com/eflo11/webpack-data-url#readme"
+  "homepage": "https://github.com/eflo11/webpack-data-url#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
