@@ -1,0 +1,32 @@
+{
+  "name": "webpack-data-url",
+  "version": "1.0.0",
+  "description": "This allows you to specify data that you need to have pulled in to your project before you compile your project.",
+  "main": "src/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "scripts": {
+    "commit": "npx git-cz",
+    "lint": "eslint src",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eflo11/webpack-data-url.git"
+  },
+  "keywords": [
+    "webpack",
+    "url",
+    "external"
+  ],
+  "author": "Ethan Flory",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eflo11/webpack-data-url/issues"
+  },
+  "homepage": "https://github.com/eflo11/webpack-data-url#readme"
+}
