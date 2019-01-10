@@ -36,8 +36,14 @@ export default class DataFetch {
    * @param {object} compiler - Webpack compiler.
    */
   apply(compiler) {
-    compiler.hooks.compile.tap('WebpackDataUrl', () => {
-      this.fetchFile();
+    let initializedHook = false;
+
+    compiler.hooks.beforeCompile.tapAsync('WebpackDataUrl', async (compilingParams, cb) => {
+      if (initializedHook) return cb();
+
+      initializedHook = true;
+      await this.fetchFile();
+      return cb();
     });
   }
 }
