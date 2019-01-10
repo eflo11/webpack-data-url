@@ -21,7 +21,7 @@
     "webpack": "^4.4.0"
   },
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "babel src -d lib --ignore 'src/*.spec.js'",
     "clean": "del-cli lib",
     "commit": "npx git-cz",
     "lint": "eslint src",
