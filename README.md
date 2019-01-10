@@ -5,22 +5,18 @@
 </div>
 
 ## Getting Started
----
 These instructions will get you up and running with pulling in your data to your project before you compile your Webpack build.
 
 ### **Prerequisites**
----
 - Webpack 4
 
 ### **Installing**
----
 1. Install to your dev-dependencies.
     ```javascript
     npm install --save-dev webpack-data-url
     ```
 
 ### **Usage**
----
 1. webpack.config.js
     ```javascript
     import WebpackDataUrl from 'webpack-data-url';
@@ -33,14 +29,12 @@ These instructions will get you up and running with pulling in your data to your
     ```
 
 ### **Options**
----
 |Name|Type|Default|Description|
 |--|:--:|:--:|:--:|
 |**`url`**| `{String}`| ``|Url that you wish to request data from.|
 |**`directory`**| `{String}`|`./index.json`|Directory and name of file you wish to store your data from.|
 
 ### **Built With**
----
 - [request](https://github.com/request/request-promise) - Framework used for network requests.
 - [fs](https://nodejs.org/api/fs.html) - Used for writing to the file system.
 - [util](https://nodejs.org/api/util.html) - Used for promisify
