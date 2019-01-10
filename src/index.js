@@ -7,7 +7,7 @@ const writeFilePs = promisify(fs.writeFile);
 const getRequestPs = promisify(get);
 
 
-export default class DataFetch {
+class WebpackDataUrl {
   /**
    * This is used to specify configuration used for fetching and writing the file.
    * @param {object} options
@@ -47,3 +47,6 @@ export default class DataFetch {
     });
   }
 }
+
+WebpackDataUrl.default = WebpackDataUrl;
+export default WebpackDataUrl;
