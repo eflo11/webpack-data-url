@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "This allows you to specify data that you need to have pulled in to your project before you compile your project.",
   "main": "lib/index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "request": "^2.88.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
@@ -14,8 +17,7 @@
     "eslint": "^5.12.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "jest": "^23.6.0",
-    "request": "^2.88.0"
+    "jest": "^23.6.0"
   },
   "peerDependencies": {
     "webpack": "^4.4.0"
