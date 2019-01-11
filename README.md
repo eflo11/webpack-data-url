@@ -32,7 +32,7 @@ These instructions will get you up and running with pulling in your data to your
 |Name|Type|Default|Description|
 |--|:--:|:--:|:--:|
 |**`url`**| `{String}`| ``|Url that you wish to request data from.|
-|**`directory`**| `{String}`|`./index.json`|Directory and name of file you wish to store your data from.|
+|**`directory`**| `{String}`|`./data.json`|Directory and name of file you wish to store your data from.|
 
 ### **Built With**
 - [request](https://github.com/request/request-promise) - Framework used for network requests.

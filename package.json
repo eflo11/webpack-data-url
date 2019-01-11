@@ -4,7 +4,6 @@
   "description": "This allows you to specify data that you need to have pulled in to your project before you compile your project.",
   "main": "lib/index.js",
   "dependencies": {
-    "@babel/polyfill": "^7.2.5",
     "request": "^2.88.0"
   },
   "devDependencies": {

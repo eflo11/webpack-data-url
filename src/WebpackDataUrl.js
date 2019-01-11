@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import '@babel/polyfill';
 import { get } from 'request';
 import { promisify } from 'util';
 import fs from 'fs';
@@ -22,10 +20,10 @@ class WebpackDataUrl {
   /**
    * This will go fetch the desired file and save to specified directory.
    */
-  static async fetchFile() {
+  async fetchFile() {
     try {
-      const { body } = await getRequestPs(this.options.url);
-      return await writeFilePs(this.options.directory, body);
+      const { body } = await getRequestPs(this.options.url || '');
+      return await writeFilePs(this.options.directory || './data.json', body);
     } catch (e) {
       return new Error(`There was an issue fetching your file: ${e}`);
     }
