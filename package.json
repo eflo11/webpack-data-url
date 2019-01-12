@@ -10,24 +10,25 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
-    "babel-core": "^7.0.0-bridge.0",
+    "@babel/register": "^7.0.0",
+    "chai": "^4.2.0",
     "cz-conventional-changelog": "^2.1.0",
     "del-cli": "^1.1.0",
     "eslint": "^5.12.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "jest": "^23.6.0"
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
   },
   "peerDependencies": {
     "webpack": "^4.4.0"
   },
   "scripts": {
-    "build": "babel src -d lib --ignore 'src/*.spec.js'",
+    "build": "babel src -d lib",
     "clean": "del-cli lib",
     "commit": "npx git-cz",
     "lint": "eslint src",
-    "test": "jest",
-    "test:coverage": "jest --collectCoverageFrom='src/**/*.js' --coverage"
+    "test": "nyc mocha --no-deprecation --compilers @babel/register"
   },
   "files": [
     "lib"
