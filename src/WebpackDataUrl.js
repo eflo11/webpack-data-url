@@ -1,10 +1,5 @@
-import { get } from 'request';
-import { promisify } from 'util';
+import axios from 'axios';
 import fs from 'fs';
-
-const writeFilePs = promisify(fs.writeFile);
-const getRequestPs = promisify(get);
-
 
 class WebpackDataUrl {
   /**
@@ -17,13 +12,23 @@ class WebpackDataUrl {
     this.options = options;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  writeFilePromise(directory, data) {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(directory, data, (err) => {
+        if (err) reject(err);
+        resolve();
+      });
+    });
+  }
+
   /**
    * This will go fetch the desired file and save to specified directory.
    */
   async fetchFile() {
     try {
-      const { body } = await getRequestPs(this.options.url || '');
-      return await writeFilePs(this.options.directory || './data.json', body);
+      const data = await axios.get(this.options.url || '');
+      return await this.writeFilePromise(this.options.directory || './data.json', JSON.stringify(data));
     } catch (e) {
       return new Error(`There was an issue fetching your file: ${e}`);
     }
