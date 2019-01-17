@@ -9,7 +9,13 @@ class WebpackDataUrl {
    * @param {string} options.url - Url that you are fetching data from.
    */
   constructor(options) {
-    this.options = options;
+    // Check to keep compatibility from 1.0.0 to 1.0.1
+    if (Array.isArray(options)) {
+      this.options = options;
+    } else {
+      this.options = [];
+      this.options.push(options);
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -27,8 +33,17 @@ class WebpackDataUrl {
    */
   async fetchFile() {
     try {
-      const data = await axios.get(this.options.url || '');
-      return await this.writeFilePromise(this.options.directory || './data.json', JSON.stringify(data));
+      const requests = [];
+      for (let i = 0; i < this.options.length; i += 1) {
+        requests.push(axios.get(this.options[i].url || ''));
+      }
+      const data = await axios.all(requests);
+
+      const files = [];
+      for (let i = 0; i < this.options.length; i += 1) {
+        files.push(this.writeFilePromise(this.options[i].directory || '.data.json', JSON.stringify(data[i])));
+      }
+      return await Promise.all(files);
     } catch (e) {
       return new Error(`There was an issue fetching your file: ${e}`);
     }

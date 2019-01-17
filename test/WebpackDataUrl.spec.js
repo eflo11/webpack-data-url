@@ -15,14 +15,15 @@ describe('WebpackDataUrl', () => {
     sinon.restore();
   });
 
-  it('should properly set options on creation of DataFetch class', () => {
-    const options = {
+  it('should properly set options to an array if passed an object', () => {
+    const options = [{
       directory: 'some/dir',
       url: 'https://www.google.com',
-    };
+    }];
 
-    const webpackPlugin = new WebpackDataUrl(options);
-    expect(webpackPlugin.options).to.eq(options);
+    const webpackPlugin = new WebpackDataUrl(options[0]);
+    expect(Array.isArray(webpackPlugin.options)).to.be.true;
+    expect(webpackPlugin.options[0]).to.eq(options[0]);
   });
 
   it('should properly make request to get data', (done) => {
