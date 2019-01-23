@@ -1,10 +1,5 @@
-import { get } from 'request';
-import { promisify } from 'util';
+import axios from 'axios';
 import fs from 'fs';
-
-const writeFilePs = promisify(fs.writeFile);
-const getRequestPs = promisify(get);
-
 
 class WebpackDataUrl {
   /**
@@ -14,7 +9,23 @@ class WebpackDataUrl {
    * @param {string} options.url - Url that you are fetching data from.
    */
   constructor(options) {
-    this.options = options;
+    // Check to keep compatibility from 1.0.0 to 1.0.1
+    if (Array.isArray(options)) {
+      this.options = options;
+    } else {
+      this.options = [];
+      this.options.push(options);
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  writeFilePromise(directory, data) {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(directory, data, (err) => {
+        if (err) reject(err);
+        resolve();
+      });
+    });
   }
 
   /**
@@ -22,8 +33,16 @@ class WebpackDataUrl {
    */
   async fetchFile() {
     try {
-      const { body } = await getRequestPs(this.options.url || '');
-      return await writeFilePs(this.options.directory || './data.json', body);
+      const requests = [];
+      for (let i = 0; i < this.options.length; i += 1) {
+        requests.push(axios.get(this.options[i].url || ''));
+      }
+      const data = await axios.all(requests);
+      const files = [];
+      for (let i = 0; i < this.options.length; i += 1) {
+        files.push(this.writeFilePromise(this.options[i].directory || './data.json', JSON.stringify(data[i].data)));
+      }
+      return await Promise.all(files);
     } catch (e) {
       return new Error(`There was an issue fetching your file: ${e}`);
     }
