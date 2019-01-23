@@ -41,7 +41,7 @@ class WebpackDataUrl {
 
       const files = [];
       for (let i = 0; i < this.options.length; i += 1) {
-        files.push(this.writeFilePromise(this.options[i].directory || '.data.json', JSON.stringify(data[i])));
+        files.push(this.writeFilePromise(this.options[i].directory || './data.json', JSON.stringify(data[i])));
       }
       return await Promise.all(files);
     } catch (e) {
