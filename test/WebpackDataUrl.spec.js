@@ -8,7 +8,9 @@ import WebpackDataUrl from '../src/WebpackDataUrl';
 
 describe('WebpackDataUrl', () => {
   const testData = {
-    data: 'test',
+    data: {
+      user: 'test',
+    },
   };
 
   afterEach(() => {
@@ -76,7 +78,7 @@ describe('WebpackDataUrl', () => {
       .then(() => {
         const fsWriteFileArgs = fs.writeFile.getCall(0).args;
         expect(fsWriteFileArgs[0]).to.eq('./data.json');
-        expect(fsWriteFileArgs[1]).to.eq(JSON.stringify(testData));
+        expect(fsWriteFileArgs[1]).to.eq(JSON.stringify(testData.data));
         expect(fs.writeFile.calledOnce).to.be.true;
         done();
       })
@@ -97,7 +99,7 @@ describe('WebpackDataUrl', () => {
       .then(() => {
         const fsWriteFileArgs = fs.writeFile.getCall(0).args;
         expect(fsWriteFileArgs[0]).to.eq(options.directory);
-        expect(fsWriteFileArgs[1]).to.eq(JSON.stringify(testData));
+        expect(fsWriteFileArgs[1]).to.eq(JSON.stringify(testData.data));
         expect(fs.writeFile.calledOnce).to.be.true;
         done();
       })
@@ -124,12 +126,12 @@ describe('WebpackDataUrl', () => {
       .then(() => {
         const testJSONWrite = fs.writeFile.getCall(0).args;
         expect(testJSONWrite[0]).to.eq(options[0].directory);
-        expect(testJSONWrite[1]).to.eq(JSON.stringify(testData));
+        expect(testJSONWrite[1]).to.eq(JSON.stringify(testData.data));
         expect(axios.get.getCall(0).args[0]).to.eq(options[0].url);
 
         const secondJSONWrite = fs.writeFile.getCall(1).args;
         expect(secondJSONWrite[0]).to.eq(options[1].directory);
-        expect(secondJSONWrite[1]).to.eq(JSON.stringify(testData));
+        expect(secondJSONWrite[1]).to.eq(JSON.stringify(testData.data));
         expect(fs.writeFile.calledTwice).to.be.true;
 
         expect(axios.get.getCall(1).args[0]).to.eq(options[1].url);

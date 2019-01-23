@@ -38,10 +38,9 @@ class WebpackDataUrl {
         requests.push(axios.get(this.options[i].url || ''));
       }
       const data = await axios.all(requests);
-
       const files = [];
       for (let i = 0; i < this.options.length; i += 1) {
-        files.push(this.writeFilePromise(this.options[i].directory || './data.json', JSON.stringify(data[i])));
+        files.push(this.writeFilePromise(this.options[i].directory || './data.json', JSON.stringify(data[i].data)));
       }
       return await Promise.all(files);
     } catch (e) {
