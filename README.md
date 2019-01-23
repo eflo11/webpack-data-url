@@ -1,7 +1,7 @@
 <h1 align="center">webpack-data-url</h1>
 
 <div align="center">
-  Pull in a remote dependencies that contain data you need before each build.
+  Pull in remote dependencies that contain data you need before each build.
 </div>
 
 ## Getting Started
