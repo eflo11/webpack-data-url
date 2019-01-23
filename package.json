@@ -1,6 +1,6 @@
 {
   "name": "webpack-data-url",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This allows you to specify data that you need to have pulled in to your project before you compile your project.",
   "main": "lib/index.js",
   "dependencies": {
