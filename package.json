@@ -1,11 +1,10 @@
 {
   "name": "webpack-data-url",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This allows you to specify data that you need to have pulled in to your project before you compile your project.",
   "main": "lib/index.js",
   "dependencies": {
-    "axios": "^0.18.0",
-    "request": "^2.88.0"
+    "axios": "^0.18.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
