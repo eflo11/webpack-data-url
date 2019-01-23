@@ -103,4 +103,39 @@ describe('WebpackDataUrl', () => {
       })
       .catch(e => done(e));
   });
+
+  it('should properly handle an array of requests', (done) => {
+    sinon.stub(axios, 'get').resolves(testData);
+    sinon.stub(fs, 'writeFile').yields();
+
+    const options = [
+      {
+        directory: './test.json',
+        url: 'https://www.google.com',
+      },
+      {
+        directory: './second.json',
+        url: 'http://www.espn.com',
+      },
+    ];
+
+    const webpackPlugin = new WebpackDataUrl(options);
+    webpackPlugin.fetchFile()
+      .then(() => {
+        const testJSONWrite = fs.writeFile.getCall(0).args;
+        expect(testJSONWrite[0]).to.eq(options[0].directory);
+        expect(testJSONWrite[1]).to.eq(JSON.stringify(testData));
+        expect(axios.get.getCall(0).args[0]).to.eq(options[0].url);
+
+        const secondJSONWrite = fs.writeFile.getCall(1).args;
+        expect(secondJSONWrite[0]).to.eq(options[1].directory);
+        expect(secondJSONWrite[1]).to.eq(JSON.stringify(testData));
+        expect(fs.writeFile.calledTwice).to.be.true;
+
+        expect(axios.get.getCall(1).args[0]).to.eq(options[1].url);
+        expect(axios.get.calledTwice).to.be.true;
+        done();
+      })
+      .catch(e => done(e));
+  });
 });
